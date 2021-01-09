@@ -1,0 +1,27 @@
+.author-img {
+  width: 80px;
+}
+.table-header th{
+  text-align: center;
+}
+
+.table-repo-name-col {
+  width: 100px;
+}
+
+.table-desc-col {
+  width: 50%;
+  text-align: left;
+}
+
+.table-num-col {
+  width: 3%;
+}
+
+.table-img-col {
+  width: 7%;
+}
+
+.table-name-col {
+  width: 5%;
+}

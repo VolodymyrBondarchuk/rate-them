@@ -6,7 +6,8 @@ const MainMenu = () => {
 
         <>
             <Link to="/">Home</Link> <br/>
-            <Link to="/add-review">Add review</Link><br/><br/>
+            <Link to="/add-review">Add review</Link><br/>
+            <Link to="/list">Reviews</Link><br/><br/>
         </>
     )
 }

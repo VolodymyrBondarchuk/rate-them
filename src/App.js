@@ -3,6 +3,7 @@ import WelcomeScreen from "./pages/welcome-screen/welcome-screen";
 import AddReview from "./pages/add-review/add-review";
 import {Switch, Route} from "react-router";
 import {BrowserRouter} from "react-router-dom";
+import RepositoryList from "./pages/repository-list/RepositoryList";
 
 
 function App({state, addReview}) {
@@ -19,6 +20,7 @@ function App({state, addReview}) {
                         feedback={review ? review.feedback : {}}
                         addReview={addReview}/>}
                 />
+                <Route exact path="/list" component={RepositoryList}/>
             </Switch>
         </BrowserRouter>
 

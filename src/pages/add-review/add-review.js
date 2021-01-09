@@ -11,6 +11,9 @@ const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
     const [companyName, setCompanyName] = React.useState("");
     const [cityName, setCityName] = React.useState("");
 
+    const [hrPersonName, setHrPersonName] = React.useState("");
+    const [techInterviewerPersonName, setTechInterviewerPersonName] = React.useState("");
+
     //HR Start
     const [hrIceBrakeValue, setHrIceBrakeValue] = React.useState(hr.ice_brake);
     const [hrIceBrakeHover, setHrIceBrakeHover] = React.useState(0);
@@ -66,6 +69,7 @@ const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
             companyName: companyName,
             cityName: cityName,
             hr: {
+                contactPersonName: hrPersonName,
                 ice_brake: hrIceBrakeValue,
                 attitude: hrAttitudeValue,
                 punctuality: hrPunctualityValue,
@@ -73,6 +77,7 @@ const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
                 comment: hrComment
             },
             tech: {
+                contactPersonName: techInterviewerPersonName,
                 ice_brake: techIceBrakeValue,
                 attitude: techAttitudeValue,
                 tech_questions_quality: techQuestionsQualityValue,
@@ -101,22 +106,29 @@ const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
                                setValueMethod={setVacancyName}
                     />
 
-
+                    <br/>
                     {/*//TOOD: change it to dropdown list*/}
                     <InputItem title='Компанія'
                                name="company-name"
                                placeholder='NiX'
                                setValueMethod={setCompanyName}
                     />
-
+                    <br/>
                     {/*//TOOD: change it to dropdown list*/}
                     <InputItem title='Місто'
                                name="city-name"
                                placeholder='Львів'
                                setValueMethod={setCityName}
                     />
-
+                    <br/>
                     <h3>Hr інтерв'ю</h3>
+
+                    <InputItem title='ПІБ HR-a'
+                               name="hr-name"
+                               placeholder='Олена Давидова'
+                               setValueMethod={setHrPersonName}
+                    />
+                    <br/>
                     <RatingItem title="Ice brake (якість, наявність)"
                                 ratingName='hr-ice-brake'
                                 value={hrIceBrakeValue}
@@ -165,6 +177,13 @@ const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
                     <br/>
                     <br/>
                     <h3>Тех інтерв'ю</h3>
+
+                    <InputItem title='ПІБ Tech Інтервювера'
+                               name="tech-interviewer-name"
+                               placeholder='Олег Данилюк'
+                               setValueMethod={setTechInterviewerPersonName}
+                    />
+                    <br/>
                     <RatingItem title="Ice brake (якість, наявність)"
                                 ratingName='tech-ice-brake'
                                 value={techIceBrakeValue}
