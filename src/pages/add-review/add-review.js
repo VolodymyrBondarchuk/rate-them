@@ -4,12 +4,17 @@ import {Input} from '@material-ui/core';
 import Button from "@material-ui/core/Button";
 import RatingItem from "../../components/rating-item/rating-item";
 import InputItem from "../../components/input-item/input-item";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
 
     const [vacancyName, setVacancyName] = React.useState("");
     const [companyName, setCompanyName] = React.useState("");
     const [cityName, setCityName] = React.useState("");
+
+    const [startDate, setStartDate] = React.useState(new Date());
+    const [endDate, setEndDate] = React.useState(new Date());
 
     const [hrPersonName, setHrPersonName] = React.useState("");
     const [techInterviewerPersonName, setTechInterviewerPersonName] = React.useState("");
@@ -97,6 +102,9 @@ const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
         <>
             <MainMenu/>
             <h1 className='review-h1'>Add Review</h1>
+
+            <br/>
+
             <div className="review-container">
                 <div className='review-body'>
                     {/*//TOOD: change it to dropdown list*/}
@@ -120,6 +128,19 @@ const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
                                placeholder='Львів'
                                setValueMethod={setCityName}
                     />
+                    <br/>
+                    <br/>
+                    <div className='review-item-body'>
+                        <span className='review-lable'>Дата початку інтерв'ю</span>
+                        <DatePicker selected={startDate} onChange={setStartDate} />
+                    </div>
+                    <br/>
+                    <div className='review-item-body'>
+                        <span className='review-lable'>Дата завершення інтерв'ю</span>
+                        <DatePicker selected={endDate} onChange={setEndDate} />
+                    </div>
+                    <br/>
+                    <br/>
                     <br/>
                     <h3>Hr інтерв'ю</h3>
 
