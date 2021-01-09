@@ -16,7 +16,8 @@ function App({state, addReview}) {
                         reviewsHover={state.reviewsHover}
                         hr={review ? review.hr: {}}
                         tech={review ? review.tech : {}}
-                        feedback={review ? review.feedback : {}} addReview={addReview}/>}
+                        feedback={review ? review.feedback : {}}
+                        addReview={addReview}/>}
                 />
             </Switch>
         </BrowserRouter>
