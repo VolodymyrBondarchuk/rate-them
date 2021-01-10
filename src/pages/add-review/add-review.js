@@ -6,6 +6,7 @@ import RatingItem from "../../components/rating-item/rating-item";
 import InputItem from "../../components/input-item/input-item";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import ReviewApi from "../../api/ReviewApi";
 
 const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
 
@@ -61,7 +62,7 @@ const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
     const [feedbackComment, setFeedbackComment] = React.useState("");
     //Feedback End
 
-
+    const [successSave, setSuccessSave] = React.useState(false);
 
     useEffect(() => {
         //setIceBrakeValue(hr.ice_brake)
@@ -73,30 +74,44 @@ const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
             vacancyName: vacancyName,
             companyName: companyName,
             cityName: cityName,
+            startDate: startDate,
+            endDate: endDate,
             hr: {
-                contactPersonName: hrPersonName,
-                ice_brake: hrIceBrakeValue,
+                name: hrPersonName,
+                iceBrake: hrIceBrakeValue,
                 attitude: hrAttitudeValue,
                 punctuality: hrPunctualityValue,
                 impression: hrImpressionValue,
                 comment: hrComment
             },
             tech: {
-                contactPersonName: techInterviewerPersonName,
-                ice_brake: techIceBrakeValue,
+                interviewerName: techInterviewerPersonName,
+                iceBrake: techIceBrakeValue,
                 attitude: techAttitudeValue,
-                tech_questions_quality: techQuestionsQualityValue,
+                questionsQuality: techQuestionsQualityValue,
                 impression: techImpressionValue,
                 comment: techComment
             },
             feedback: {
-                feedback_on_time: 3,
-                feedback_detalization: 1,
+                onTime: 3,
+                detailization: 1,
                 comment: feedbackComment
             }
         }
 
-        addReview(review);
+        debugger
+        ReviewApi().addReview(review)
+            .then((res) => {
+                setSuccessSave(true);
+                console.log('Saved success!')
+            })
+            .catch(() => {
+                setSuccessSave(false);
+                console.log('Saved false')
+            });
+
+        //stores in redux
+        //addReview(review);
     }
     return (
         <>
@@ -187,13 +202,11 @@ const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
                                 hover={hrImpressionHover}
                     />
                     <br/>
-                    <div className='review-item-body'>
-                        <span className='review-lable'>Коментар</span>
-                        <Input name="hr-comment"
-                               onChange={(event, newValue) => {
-                                   setHrComment(newValue);
-                               }}/>
-                    </div>
+                    <InputItem title='Коментар'
+                               name="hr-comment"
+                               placeholder=''
+                               setValueMethod={setHrComment}
+                    />
                     <br/>
                     <br/>
                     <br/>
@@ -241,13 +254,12 @@ const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
                                 hover={techImpressionHover}
                     />
                     <br/>
-                    <div className='review-item-body'>
-                        <span className='review-lable'>Коментар</span>
-                        <Input name="tech-comment"
-                               onChange={(event, newValue) => {
-                                   setTechComment(newValue);
-                               }}/>
-                    </div>
+
+                    <InputItem title='Коментар'
+                               name="tech-comment"
+                               placeholder=''
+                               setValueMethod={setTechComment}
+                    />
 
                     <br/>
                     <br/>
@@ -271,13 +283,11 @@ const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
                                 hover={feedbackDetalizationHover}
                     />
                     <br/>
-                    <div className='review-item-body'>
-                        <span className='review-lable'>Коментар</span>
-                        <Input name='feedback-comment'
-                               onChange={(event, newValue) => {
-                                   setFeedbackComment(newValue);
-                               }}/>
-                    </div>
+                    <InputItem title='Коментар'
+                               name="feedback-comment"
+                               placeholder=''
+                               setValueMethod={setFeedbackComment}
+                    />
 
                     <br/>
                     <br/>

@@ -73,11 +73,13 @@ let RepositoryList = () => {
                         <thead className='table-header'>
                         <tr>
                             <th>#</th>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th className='table-repo-name-col'>Repo Name</th>
-                            <th>Repo Url</th>
-                            <th className='table-desc-col'>Description</th>
+                            <th>HR</th>
+                            <th>Interviewer</th>
+                            <th>Date</th>
+                            <th>Company</th>
+                            <th>Rating</th>
+                            <th>Vacancy</th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -85,11 +87,14 @@ let RepositoryList = () => {
                              return (
                                  <tr key={i}>
                                      <td className='table-num-col'>{sliceFrom + i + 1}</td>
+                                     <td>{el.name}</td>
+                                     <td>{el.name}</td>
+                                     <td>{el.name}</td>
                                      <td className='table-img-col'><img className='author-img'
                                                                         src={el.owner.avatar_url}/></td>
                                      <td className='table-name-col'>{el.owner.login}</td>
-                                     <td>{el.name}</td>
-                                     <td>{el.owner.repos_url}</td>
+
+                                     {/*<td>{el.owner.repos_url}</td>*/}
                                      <td className='table-desc-col'>{el.description}</td>
                                  </tr>
                              )
