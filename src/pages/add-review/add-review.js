@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
 import MainMenu from "../../components/main-menu/main-menu";
-import {Input} from '@material-ui/core';
 import Button from "@material-ui/core/Button";
 import RatingItem from "../../components/rating-item/rating-item";
 import InputItem from "../../components/input-item/input-item";
@@ -99,7 +98,6 @@ const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
             }
         }
 
-        debugger
         ReviewApi().addReview(review)
             .then((res) => {
                 setSuccessSave(true);

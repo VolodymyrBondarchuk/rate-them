@@ -13,7 +13,7 @@ const RatingItem = ({title, value, setValueMethod, setHoverMethod, reviewsHover,
                 <span className='review-lable'>{title}</span>
                 <Rating
                     name={ratingName}
-                    precision={0.5}
+                    precision={1}
                     value={value}
                     onChange={(event, newValue) => {
                         setValueMethod(newValue);
