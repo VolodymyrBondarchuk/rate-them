@@ -5,7 +5,7 @@ let store = {
             hr: {
                 ice_brake: {
                     0.5: 'Дно-',
-                    1: 'Дно',
+                    1: '1 - Дно',
                     1.5: '1.5',
                     2: '2',
                     2.5: '2.5',
@@ -17,7 +17,7 @@ let store = {
                 },
                 attitude: {
                     0.5: 'Дно-',
-                    1: 'Дно',
+                    1: '1 - Дно',
                     1.5: '1.5',
                     2: '2',
                     2.5: '2.5',
@@ -29,7 +29,7 @@ let store = {
                 },
                 punctuality: {
                     0.5: 'Дно-',
-                    1: 'Дно',
+                    1: '1 - Дно',
                     1.5: '1.5',
                     2: '2',
                     2.5: '2.5',
@@ -41,7 +41,7 @@ let store = {
                 },
                 impression: {
                     0.5: 'Дно-',
-                    1: 'Дно',
+                    1: '1 - Дно',
                     1.5: '1.5',
                     2: '2',
                     2.5: '2.5',
@@ -56,7 +56,7 @@ let store = {
             tech: {
                 ice_brake: {
                     0.5: 'Дно-',
-                    1: 'Дно',
+                    1: '1 - Дно',
                     1.5: '1.5',
                     2: '2',
                     2.5: '2.5',
@@ -68,7 +68,7 @@ let store = {
                 },
                 attitude: {
                     0.5: 'Дно-',
-                    1: 'Дно',
+                    1: '1 - Дно',
                     1.5: '1.5',
                     2: '2',
                     2.5: '2.5',
@@ -80,7 +80,7 @@ let store = {
                 },
                 tech_questions_quality: {
                     0.5: 'Дно-',
-                    1: 'Дно',
+                    1: '1 - Дно',
                     1.5: '1.5',
                     2: '2',
                     2.5: '2.5',
@@ -92,7 +92,7 @@ let store = {
                 },
                 impression: {
                     0.5: 'Дно-',
-                    1: 'Дно',
+                    1: '1 - Дно',
                     1.5: '1.5',
                     2: '2',
                     2.5: '2.5',
@@ -107,7 +107,7 @@ let store = {
             feedback: {
                 feedback_on_time: {
                     0.5: 'Дно-',
-                    1: 'Дно',
+                    1: '1 - Дно',
                     1.5: '1.5',
                     2: '2',
                     2.5: '2.5',
@@ -119,7 +119,7 @@ let store = {
                 },
                 feedback_detalization: {
                     0.5: 'Дно-',
-                    1: 'Дно',
+                    1: '1 - Дно',
                     1.5: '1.5',
                     2: '2',
                     2.5: '2.5',
@@ -131,7 +131,7 @@ let store = {
                 },
                 comment: ""
             }
-        },
+        }/*,
         addReview: {
             hr: {
                 ice_brake: 1,
@@ -152,17 +152,17 @@ let store = {
                 feedback_detalization: 1,
                 comment: "Фігня"
             }
-        },
+        },*/,
 
         reviews: []
     },
     getState(){
       return this._state;
     },
-    addReview(review) {
+/*    addReview(review) {
         this._state.reviews.push(review);
         this.reRender(this._state);
-    },
+    },*/
     subscribe(observer){
         this.reRender = observer;
     },

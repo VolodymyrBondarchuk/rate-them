@@ -7,7 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ReviewApi from "../../api/ReviewApi";
 
-const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
+const AddReview = ({reviewsHover}) => {
 
     const [vacancyName, setVacancyName] = React.useState("");
     const [companyName, setCompanyName] = React.useState("");
@@ -20,42 +20,42 @@ const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
     const [techInterviewerPersonName, setTechInterviewerPersonName] = React.useState("");
 
     //HR Start
-    const [hrIceBrakeValue, setHrIceBrakeValue] = React.useState(hr.ice_brake);
+    const [hrIceBrakeValue, setHrIceBrakeValue] = React.useState(0);
     const [hrIceBrakeHover, setHrIceBrakeHover] = React.useState(0);
 
-    const [hrAttitudeValue, setHrAttitudeValue] = React.useState(hr.attitude);
+    const [hrAttitudeValue, setHrAttitudeValue] = React.useState(0);
     const [hrAttitudeHover, setHrAttitudeHover] = React.useState(0);
 
-    const [hrPunctualityValue, setHrPunctualityValue] = React.useState(hr.punctuality);
+    const [hrPunctualityValue, setHrPunctualityValue] = React.useState(0);
     const [hrPunctualityHover, setHrPunctualityHover] = React.useState(0);
 
-    const [hrImpressionValue, setHrImpressionValue] = React.useState(hr.impression);
+    const [hrImpressionValue, setHrImpressionValue] = React.useState(0);
     const [hrImpressionHover, setHrImpressionHover] = React.useState(0);
 
     const [hrComment, setHrComment] = React.useState("");
     //HR End
 
     //Tech Start
-    const [techIceBrakeValue, setTechIceBrakeValue] = React.useState(tech.ice_brake);
+    const [techIceBrakeValue, setTechIceBrakeValue] = React.useState(0);
     const [techIceBrakeHover, setTechIceBrakeHover] = React.useState(0);
 
-    const [techAttitudeValue, setTechAttitudeValue] = React.useState(tech.attitude);
+    const [techAttitudeValue, setTechAttitudeValue] = React.useState(0);
     const [techAttitudeHover, setTechAttitudeHover] = React.useState(0);
 
-    const [techQuestionsQualityValue, setTechQuestionsQualityValue] = React.useState(tech.tech_questions_quality);
+    const [techQuestionsQualityValue, setTechQuestionsQualityValue] = React.useState(0);
     const [techQuestionsQualityHover, setTechQuestionsQualityHover] = React.useState(0);
 
-    const [techImpressionValue, setTechImpressionValue] = React.useState(tech.impression);
+    const [techImpressionValue, setTechImpressionValue] = React.useState(0);
     const [techImpressionHover, setTechImpressionHover] = React.useState(0);
 
     const [techComment, setTechComment] = React.useState("");
     //Tech End
 
     //Feedback Start
-    const [feedbackOnTimeValue, setFeedbackOnTimeValue] = React.useState(feedback.feedback_on_time);
+    const [feedbackOnTimeValue, setFeedbackOnTimeValue] = React.useState(0);
     const [feedbackOnTimeHover, setFeedbackOnTimeHover] = React.useState(0);
 
-    const [feedbackDetalizationValue, setFeedbackDetalizationValue] = React.useState(feedback.feedback_detalization);
+    const [feedbackDetalizationValue, setFeedbackDetalizationValue] = React.useState(0);
     const [feedbackDetalizationHover, setFeedbackDetalizationHover] = React.useState(0);
 
     const [feedbackComment, setFeedbackComment] = React.useState("");
@@ -92,8 +92,8 @@ const AddReview = ({hr, tech, feedback, reviewsHover, addReview}) => {
                 comment: techComment
             },
             feedback: {
-                onTime: 3,
-                detailization: 1,
+                onTime: feedbackOnTimeValue,
+                detailization: feedbackDetalizationValue,
                 comment: feedbackComment
             }
         }

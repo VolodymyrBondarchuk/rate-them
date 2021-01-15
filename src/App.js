@@ -4,21 +4,17 @@ import AddReview from "./pages/add-review/add-review";
 import {Switch, Route} from "react-router";
 import {BrowserRouter} from "react-router-dom";
 import RepositoryList from "./pages/repository-list/RepositoryList";
+import store from "./redux/store";
 
 
-function App({state, addReview}) {
-    let review = state.reviews[state.reviews.length-1]; //get last review
+function App() {
     return (
         <BrowserRouter>
             <Switch>
                 <Route exact path="/" component={WelcomeScreen}/>
                 <Route exact path="/add-review" component={() =>
-                    <AddReview
-                        reviewsHover={state.reviewsHover}
-                        hr={review ? review.hr: {}}
-                        tech={review ? review.tech : {}}
-                        feedback={review ? review.feedback : {}}
-                        addReview={addReview}/>}
+                    <AddReview reviewsHover={store.getState().reviewsHover}
+                    />}
                 />
                 <Route exact path="/list" component={RepositoryList}/>
             </Switch>

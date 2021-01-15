@@ -5,6 +5,7 @@ import Pagination from "react-js-pagination";
 import SearchInput, {createFilter} from 'react-search-input'
 import MainMenu from "../../components/main-menu/main-menu";
 import ReviewApi from "../../api/ReviewApi";
+import Rating from "@material-ui/lab/Rating";
 
 let RepositoryList = () => {
 
@@ -42,7 +43,8 @@ let RepositoryList = () => {
                 setFilteredEmails(res.data.reviews)
                 setTotalItemsCount(res.data.totalItems);
                 setIsLoaded(true);
-                console.log('Saved success!')
+                console.log('Reviews Fetched Success!');
+                //debugger
             })
             .catch(error => {
                 setIsLoaded(true);
@@ -101,12 +103,15 @@ let RepositoryList = () => {
                         <thead className='table-header'>
                         <tr>
                             <th>#</th>
+                            <th>Company</th>
                             <th>HR</th>
                             <th>Interviewer</th>
-                            <th>Date</th>
-                            <th>Company</th>
-                            <th>Rating</th>
+                            <th>Feedback</th>
+
+                            {/*<th>Rating</th>*/}
                             <th>Vacancy</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
 
                         </tr>
                         </thead>
@@ -115,13 +120,48 @@ let RepositoryList = () => {
                              return (
                                  <tr key={i}>
                                      <td className='table-num-col'>{sliceFrom + i + 1}</td>
-                                     <td>{el.hr.name}</td>
-                                     <td>{el.tech.interviewerName}</td>
+                                     <td>
+                                         {el.companyName} <br/>
+                                         <Rating name="company-rating-total"
+                                                 precision={0.1}
+                                                 disabled={true}
+                                                 value={el.companyRatingTotal}
+                                         />
+                                         {Math.round((el.companyRatingTotal + Number.EPSILON) * 100) / 100}
+                                     </td>
+                                     <td>
+                                         {el.hr.name} <br/>
+                                         <Rating name="hr-rating-total"
+                                                 precision={0.1}
+                                                 disabled={true}
+                                                 value={el.hrRatingTotal}
+                                         />
+                                         {el.hrRatingTotal}
+                                     </td>
+                                     <td>
+                                         {el.tech.interviewerName} <br/>
+                                         <Rating name="tech-rating-total"
+                                                 precision={0.1}
+                                                 disabled={true}
+                                                 value={el.techRatingTotal}
+                                         />
+                                         {el.techRatingTotal}
+                                     </td>
+                                     <td>
+                                         <Rating name="feedback-rating-total"
+                                                 precision={0.1}
+                                                 disabled={true}
+                                                 value={el.feedbackRatingTotal}
+                                         />
+                                         {el.feedbackRatingTotal}
+                                     </td>
+                                     <td>{el.vacancyName}</td>
                                      <td>{formatDate(el.startDate)}</td>
-                                     <td>{el.companyName}</td>
-                                     <td>{el.hr.iceBrake}</td>
-                                     {/*<td>{el.owner.repos_url}</td>*/}
-                                     <td className='table-desc-col'>{el.vacancyName}</td>
+                                     <td>{formatDate(el.endDate)}</td>
+
+                                     {/*<td>{el.hr.iceBrake}</td>*/}
+                                     {/*<td>{el.feedbackRatingTotal}</td>*/}
+
                                  </tr>
                              )
                          })}
