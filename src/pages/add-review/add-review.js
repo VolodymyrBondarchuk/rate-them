@@ -6,6 +6,9 @@ import InputItem from "../../components/input-item/input-item";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ReviewApi from "../../api/ReviewApi";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
+import { useHistory } from "react-router-dom";
 
 const AddReview = ({reviewsHover}) => {
 
@@ -61,7 +64,10 @@ const AddReview = ({reviewsHover}) => {
     const [feedbackComment, setFeedbackComment] = React.useState("");
     //Feedback End
 
-    const [successSave, setSuccessSave] = React.useState(false);
+    const [isSuccess, setIsSuccess] = React.useState(false);
+    const [isError, setIsError] = React.useState(false);
+    const [errorMessage, setErrorMessage] = React.useState("Something went wrong");
+    let history = useHistory();
 
     useEffect(() => {
         //setIceBrakeValue(hr.ice_brake)
@@ -100,16 +106,38 @@ const AddReview = ({reviewsHover}) => {
 
         ReviewApi().addReview(review)
             .then((res) => {
-                setSuccessSave(true);
+                setIsSuccess(true);
+                setIsError(false);
                 console.log('Saved success!')
+
+                setTimeout(function() { //Start the timer
+                    history.push('/added-success') //After 1 second, set render to true
+                }.bind(this), 2000)
+
             })
-            .catch(() => {
-                setSuccessSave(false);
+            .catch((error) => {
+                //debugger
+                setIsSuccess(false);
+                setIsError(true);
+
+                let message = "";
+                if(error.response !== undefined
+                    && error.response.data !== undefined) {
+                    message += error.response.data.message;
+                } else {
+                    message += error.message;
+                }
+                setErrorMessage(message);
                 console.log('Saved false')
             });
 
         //stores in redux
         //addReview(review);
+    }
+
+    let handleClose = () => {
+        setIsError(false);
+        setErrorMessage("Something went wring");
     }
     return (
         <>
@@ -292,6 +320,20 @@ const AddReview = ({reviewsHover}) => {
                     <br/>
 
                     <Button variant="contained" color="primary" onClick={handleSaveReview}>Save</Button>
+                    <Snackbar open={isError} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity="warning">
+                            {errorMessage}
+                        </Alert>
+                    </Snackbar>
+                    <Snackbar open={isSuccess} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity="success">
+                            Saved Successfully
+                        </Alert>
+                    </Snackbar>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
                 </div>
             </div>
         </>

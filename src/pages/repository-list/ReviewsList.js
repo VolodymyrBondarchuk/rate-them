@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import './RepositoryList.css';
+import './ReviewsList.css';
 import Pagination from "react-js-pagination";
 /*import 'bootstrap/dist/css/bootstrap.css';*/
 import SearchInput, {createFilter} from 'react-search-input'
@@ -7,7 +7,7 @@ import MainMenu from "../../components/main-menu/main-menu";
 import ReviewApi from "../../api/ReviewApi";
 import Rating from "@material-ui/lab/Rating";
 
-let RepositoryList = () => {
+let ReviewsList = () => {
 
     const KEYS_TO_FILTERS = ['name', 'description', 'owner.login', 'owner.repos_url']
 
@@ -189,4 +189,4 @@ let RepositoryList = () => {
     )
 }
 
-export default RepositoryList;
+export default ReviewsList;
