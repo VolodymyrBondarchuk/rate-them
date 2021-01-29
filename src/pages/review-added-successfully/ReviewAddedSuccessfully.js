@@ -10,6 +10,7 @@ const ReviewAddedSuccessfully = () => {
     return (
 
         <>
+            <MainMenu title='Success'/>
             <Alert severity="success">
                 <AlertTitle>Success</AlertTitle>
                 Thank you! <strong>Your review has been added successfully!</strong> <br/>

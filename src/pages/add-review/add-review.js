@@ -9,6 +9,7 @@ import ReviewApi from "../../api/ReviewApi";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import { useHistory } from "react-router-dom";
+import Footer from "../../components/footer/footer";
 
 const AddReview = ({reviewsHover}) => {
 
@@ -141,7 +142,7 @@ const AddReview = ({reviewsHover}) => {
     }
     return (
         <>
-            <MainMenu/>
+            <MainMenu title="Add Review"/>
             <h1 className='review-h1'>Add Review</h1>
 
             <br/>
@@ -253,7 +254,7 @@ const AddReview = ({reviewsHover}) => {
                                 hover={techIceBrakeHover}
                     />
                     <br/>
-                    <RatingItem title="Відношення інтервювера до Вас (софт скіл)"
+                    <RatingItem title="Відношення інтерв'ювера до Вас (софт скіл)"
                                 ratingName='tech-attitude'
                                 value={techAttitudeValue}
                                 setValueMethod={setTechAttitudeValue}
@@ -336,6 +337,7 @@ const AddReview = ({reviewsHover}) => {
                     <br/>
                 </div>
             </div>
+            <Footer/>
         </>
     )
 }

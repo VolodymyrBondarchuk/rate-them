@@ -6,6 +6,31 @@ import SearchInput, {createFilter} from 'react-search-input'
 import MainMenu from "../../components/main-menu/main-menu";
 import ReviewApi from "../../api/ReviewApi";
 import Rating from "@material-ui/lab/Rating";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TablePagination from "@material-ui/core/TablePagination";
+import Footer from "../../components/footer/footer";
+import { makeStyles } from '@material-ui/core/styles';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandableTableRow from "../../components/ExpandableTableRow/ExpandableTableRow";
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+
+    },
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        fontWeight: theme.typography.fontWeightRegular,
+    },
+}));
+
 
 let ReviewsList = () => {
 
@@ -22,20 +47,10 @@ let ReviewsList = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [isError, setIsError] = useState(false);
 
+    const classes = useStyles();
+
 
     useEffect(() => {
-
-        /*RepositoryListApi().then(response => {
-            setRepositories(response.data)
-            setFilteredEmails(response.data)
-            setTotalItemsCount(response.data.length);
-            setIsLoaded(true);
-        })
-            .catch(error => {
-                console.log('Error loading data from git url: '+error)
-                setIsLoaded(true);
-                setIsError(true)
-            });*/
 
         ReviewApi().getLastAddedReviews({page: sliceFrom, amount: sliceTo})
             .then((res) => {
@@ -95,96 +110,230 @@ let ReviewsList = () => {
 
     return (
         <>
-            <MainMenu/>
+            <MainMenu title="Reviews List"/>
                 <span>
                     <SearchInput className="search-input" onChange={searchUpdated}/>
+                    <Table>
+                        <TableHead>
+                          <TableRow>
+                            <TableCell padding="checkbox" />
+                            <TableCell>#</TableCell>
+                            <TableCell>Company</TableCell>
+                            <TableCell>HR</TableCell>
+                            <TableCell>Tech</TableCell>
+                            <TableCell>Interview Rating</TableCell>
+                            <TableCell>Vacancy</TableCell>
+                            <TableCell>Start date</TableCell>
 
-                    <table className='table'>
-                        <thead className='table-header'>
-                        <tr>
-                            <th>#</th>
-                            <th>Company</th>
-                            <th>HR</th>
-                            <th>Interviewer</th>
-                            <th>Feedback</th>
+                          </TableRow>
 
-                            {/*<th>Rating</th>*/}
-                            <th>Vacancy</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
+                        </TableHead>
+                        <TableBody>
+                            {filteredEmails.slice(sliceFrom, sliceTo).map((el, i) => {
+                                return (
 
-                        </tr>
-                        </thead>
-                        <tbody>
-                         {filteredEmails.slice(sliceFrom, sliceTo).map((el, i) => {
-                             return (
-                                 <tr key={i}>
-                                     <td className='table-num-col'>{sliceFrom + i + 1}</td>
-                                     <td>
-                                         {el.companyName} <br/>
-                                         <Rating name="company-rating-total"
-                                                 precision={0.1}
-                                                 disabled={true}
-                                                 value={el.companyRatingTotal}
-                                         />
-                                         {Math.round((el.companyRatingTotal + Number.EPSILON) * 100) / 100}
-                                     </td>
-                                     <td>
-                                         {el.hr.name} <br/>
-                                         <Rating name="hr-rating-total"
-                                                 precision={0.1}
-                                                 disabled={true}
-                                                 value={el.hrRatingTotal}
-                                         />
-                                         {el.hrRatingTotal}
-                                     </td>
-                                     <td>
-                                         {el.tech.interviewerName} <br/>
-                                         <Rating name="tech-rating-total"
-                                                 precision={0.1}
-                                                 disabled={true}
-                                                 value={el.techRatingTotal}
-                                         />
-                                         {el.techRatingTotal}
-                                     </td>
-                                     <td>
-                                         <Rating name="feedback-rating-total"
-                                                 precision={0.1}
-                                                 disabled={true}
-                                                 value={el.feedbackRatingTotal}
-                                         />
-                                         {el.feedbackRatingTotal}
-                                     </td>
-                                     <td>{el.vacancyName}</td>
-                                     <td>{formatDate(el.startDate)}</td>
-                                     <td>{formatDate(el.endDate)}</td>
+                                    <ExpandableTableRow
+                                        key={i}
+                                        expandComponent={
+                                            <TableCell colSpan="25">
+                                            <Table>
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell style={{"width":"170px", "border-bottom":"0px"}}></TableCell>
+                                                        <TableCell style={{"border-bottom":"0px"}}>HR</TableCell>
+                                                        <TableCell style={{"border-bottom":"0px"}} ></TableCell>
+                                                        <TableCell style={{"width":"170px", "border-bottom":"0px"}}></TableCell>
+                                                        <TableCell style={{"border-bottom":"0px"}}>Tech</TableCell>
+                                                        <TableCell style={{"border-bottom":"0px"}}></TableCell>
+                                                        <TableCell style={{"width":"170px", "border-bottom":"0px"}}></TableCell>
+                                                        <TableCell style={{"border-bottom":"0px"}}>Feedback</TableCell>
+                                                    </TableRow>
 
-                                     {/*<td>{el.hr.iceBrake}</td>*/}
-                                     {/*<td>{el.feedbackRatingTotal}</td>*/}
+                                                </TableHead>
+                                                <TableBody>
+                                                    <TableRow>
+                                                        <TableCell>ПІБ</TableCell>
+                                                        <TableCell>{el.hr.name}</TableCell>
 
-                                 </tr>
-                             )
-                         })}
-                        </tbody>
-                    </table>
+                                                        <TableCell></TableCell>
+                                                        <TableCell>ПІБ</TableCell>
+                                                        <TableCell>{el.tech.interviewerName}</TableCell>
+                                                        <TableCell></TableCell>
+                                                        <TableCell></TableCell>
+                                                        <TableCell></TableCell>
 
-                    {!isLoaded ? <h3>Loading...</h3> :
-                             isError ? <h3 style={{color: 'red'}}>Error fetching the data...</h3> :
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        <TableCell>Ice brake (якість, наявність)</TableCell>
+                                                        <TableCell>
+                                                            <Rating name="hr-ice-brake"
+                                                                    precision={0.1}
+                                                                    disabled={true}
+                                                                    value={el.hr.iceBrake}
+                                                            />
+                                                        </TableCell>
 
-                                 filteredEmails === undefined || filteredEmails.length === 0 ?
-                                     <h3>Results not found</h3> : ''}
+                                                        <TableCell></TableCell>
+                                                        <TableCell>Ice brake (якість, наявність)</TableCell>
+                                                        <TableCell>
+                                                            <Rating name="tech-ice-brake"
+                                                                    precision={0.1}
+                                                                    disabled={true}
+                                                                    value={el.tech.iceBrake}
+                                                            />
+                                                        </TableCell>
 
-                    <Pagination
-                        activePage={activePage}
-                        itemsCountPerPage={itemsCountPerPage}
-                        totalItemsCount={totalItemsCount}
-                        pageRangeDisplayed={pageRangeDisplayed}
-                        onChange={handlePageChange}
+                                                        <TableCell></TableCell>
+
+                                                        <TableCell>Своєчасність фідбеку</TableCell>
+                                                        <TableCell>
+                                                            <Rating name="feedback-on-time"
+                                                                    precision={0.1}
+                                                                    disabled={true}
+                                                                    value={el.feedback.onTime}
+                                                            />
+                                                        </TableCell>
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        <TableCell>Відношення HR до Вас (софт скіл)</TableCell>
+                                                        <TableCell>
+                                                            <Rating name="hr-attitude"
+                                                                    precision={0.1}
+                                                                    disabled={true}
+                                                                    value={el.hr.attitude}
+                                                            />
+                                                        </TableCell>
+
+                                                        <TableCell></TableCell>
+
+                                                        <TableCell>Відношення інтерв'ювера до Вас (софт скіл)</TableCell>
+                                                        <TableCell>
+                                                            <Rating name="tech-attitude"
+                                                                    precision={0.1}
+                                                                    disabled={true}
+                                                                    value={el.tech.attitude}
+                                                            />
+                                                        </TableCell>
+
+                                                        <TableCell></TableCell>
+
+                                                        <TableCell>Розгорнутість фідбеку (причина, рекомендації)</TableCell>
+                                                        <TableCell>
+                                                            <Rating name="feedback-detalization"
+                                                                    precision={0.1}
+                                                                    disabled={true}
+                                                                    value={el.feedback.detailization}
+                                                            />
+                                                        </TableCell>
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        <TableCell>Пунктуальність (все вчасно як домовились чи були провтики)</TableCell>
+                                                        <TableCell>
+                                                            <Rating name="hr-punctuality"
+                                                                    precision={0.1}
+                                                                    disabled={true}
+                                                                    value={el.hr.punctuality}
+                                                            />
+                                                        </TableCell>
+
+                                                        <TableCell></TableCell>
+
+                                                        <TableCell>Продуманість тех питань (якість питань)</TableCell>
+                                                        <TableCell>
+                                                            <Rating name="tech-questions-quality"
+                                                                    precision={0.1}
+                                                                    disabled={true}
+                                                                    value={el.tech.questionsQuality}
+                                                            />
+                                                        </TableCell>
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        <TableCell>Враження після спілкування (осадочок, позитив)</TableCell>
+                                                        <TableCell>
+                                                            <Rating name="hr-impression"
+                                                                    precision={0.1}
+                                                                    disabled={true}
+                                                                    value={el.hr.impression}
+                                                            />
+                                                        </TableCell>
+
+                                                        <TableCell></TableCell>
+
+                                                        <TableCell>Враження після спілкування (осадочок, позитив)</TableCell>
+                                                        <TableCell>
+                                                            <Rating name="tech-impression"
+                                                                    precision={0.1}
+                                                                    disabled={true}
+                                                                    value={el.tech.impression}
+                                                            />
+                                                        </TableCell>
+                                                    </TableRow>
+                                                </TableBody>
+                                            </Table>
+                                            </TableCell>
+                                        }
+                                    >
+                                        <TableCell>{sliceFrom + i + 1}</TableCell>
+                                        <TableCell>{el.companyName}</TableCell>
+                                        <TableCell>{el.hr.name}</TableCell>
+                                        <TableCell>{el.tech.interviewerName}</TableCell>
+                                        <TableCell>
+                                            <Rating name="company-rating-total"
+                                                    precision={0.1}
+                                                    disabled={true}
+                                                    value={el.companyRatingTotal}
+                                            />
+                                            {/*<span>{el.feedbackRatingTotal}</span>*/}
+                                        </TableCell>
+                                        <TableCell>{el.vacancyName}</TableCell>
+                                        <TableCell>{formatDate(el.startDate)}</TableCell>
+                                    </ExpandableTableRow>
+
+
+
+
+                                    )})}
+                        </TableBody>
+                    </Table>
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 25]}
+                        component="div"
+                        count={10}
+                        rowsPerPage={5}
+                        page={1}
+                        onChangePage={handlePageChange}
+                        /*onChangeRowsPerPage={handleChangeRowsPerPage}*/
                     />
+
+
+                      <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel2a-content"
+                            id="panel2a-header"
+                        >
+                          <Typography className={classes.heading}>Accordion 2</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                          <Typography>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                            sit amet blandit leo lobortis eget.
+                          </Typography>
+                        </AccordionDetails>
+                      </Accordion>
+                      <Accordion disabled>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel3a-content"
+                            id="panel3a-header"
+                        >
+                          <Typography className={classes.heading}>Disabled Accordion</Typography>
+                        </AccordionSummary>
+                      </Accordion>
 
                 </span>
 
-
+            <Footer/>
         </>
     )
 }

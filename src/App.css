@@ -1,3 +1,9 @@
+.app-description {
+  width: 80%;
+  margin: 0 auto;
+  font-family: Roboto;
+}
+
 .App {
   text-align: center;
 }
