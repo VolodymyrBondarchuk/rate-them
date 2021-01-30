@@ -2,6 +2,7 @@ import logo from '../../logo.svg';
 import MainMenu from "../../components/main-menu/main-menu";
 import {FacebookShareButton} from "react-share";
 import Footer from "../../components/footer/footer";
+import onlineSurveyImg from "../../images/online-survey.jpg"
 
 const WelcomeScreen = () => {
 
@@ -9,6 +10,23 @@ const WelcomeScreen = () => {
 
         <>
             <MainMenu title='Home'/>
+
+            <div className='first-screen'>
+                <div className="div-left">
+                <p className='title'>
+                    Оцінка якості інтерв'ю ІТ компанії кандидатом
+                </p>
+                <p className='sub-title'>
+                    Залишаємо фідбек про ІТ компанію після проходження тех інтерв'ю - уникаємо хамських копаніїй - спілкуємось з Top-nice компаніями
+                </p>
+                <p className='sub-title-2'>
+                    HR-и та власники ІТ компаній мають хороше джерело зворотнього зв'язку для покращення процесу хайрінгу
+                </p>
+                </div>
+                <div className="div-right">
+                <img src={onlineSurveyImg} className='first-screen-img' />
+                </div>
+            </div>
             <div className='app-description'>
                 <p>Привіт.<br/><br/>
                     Цей проект дозволяє кандидату, який шукає роботу в ІТ та проходить співбесіди оцінити технічного інтервювера на предмет адекватного і неупередженого ставлення

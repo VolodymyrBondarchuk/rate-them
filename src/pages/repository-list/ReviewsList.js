@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import './ReviewsList.css';
-import Pagination from "react-js-pagination";
 /*import 'bootstrap/dist/css/bootstrap.css';*/
 import SearchInput, {createFilter} from 'react-search-input'
 import MainMenu from "../../components/main-menu/main-menu";
@@ -13,12 +12,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import Footer from "../../components/footer/footer";
-import { makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import {makeStyles} from '@material-ui/core/styles';
 import ExpandableTableRow from "../../components/ExpandableTableRow/ExpandableTableRow";
 
 const useStyles = makeStyles((theme) => ({
@@ -134,144 +128,7 @@ let ReviewsList = () => {
 
                                     <ExpandableTableRow
                                         key={i}
-                                        expandComponent={
-                                            <TableCell colSpan="25">
-                                            <Table>
-                                                <TableHead>
-                                                    <TableRow>
-                                                        <TableCell style={{"width":"170px", "border-bottom":"0px"}}></TableCell>
-                                                        <TableCell style={{"border-bottom":"0px"}}>HR</TableCell>
-                                                        <TableCell style={{"border-bottom":"0px"}} ></TableCell>
-                                                        <TableCell style={{"width":"170px", "border-bottom":"0px"}}></TableCell>
-                                                        <TableCell style={{"border-bottom":"0px"}}>Tech</TableCell>
-                                                        <TableCell style={{"border-bottom":"0px"}}></TableCell>
-                                                        <TableCell style={{"width":"170px", "border-bottom":"0px"}}></TableCell>
-                                                        <TableCell style={{"border-bottom":"0px"}}>Feedback</TableCell>
-                                                    </TableRow>
-
-                                                </TableHead>
-                                                <TableBody>
-                                                    <TableRow>
-                                                        <TableCell>ПІБ</TableCell>
-                                                        <TableCell>{el.hr.name}</TableCell>
-
-                                                        <TableCell></TableCell>
-                                                        <TableCell>ПІБ</TableCell>
-                                                        <TableCell>{el.tech.interviewerName}</TableCell>
-                                                        <TableCell></TableCell>
-                                                        <TableCell></TableCell>
-                                                        <TableCell></TableCell>
-
-                                                    </TableRow>
-                                                    <TableRow>
-                                                        <TableCell>Ice brake (якість, наявність)</TableCell>
-                                                        <TableCell>
-                                                            <Rating name="hr-ice-brake"
-                                                                    precision={0.1}
-                                                                    disabled={true}
-                                                                    value={el.hr.iceBrake}
-                                                            />
-                                                        </TableCell>
-
-                                                        <TableCell></TableCell>
-                                                        <TableCell>Ice brake (якість, наявність)</TableCell>
-                                                        <TableCell>
-                                                            <Rating name="tech-ice-brake"
-                                                                    precision={0.1}
-                                                                    disabled={true}
-                                                                    value={el.tech.iceBrake}
-                                                            />
-                                                        </TableCell>
-
-                                                        <TableCell></TableCell>
-
-                                                        <TableCell>Своєчасність фідбеку</TableCell>
-                                                        <TableCell>
-                                                            <Rating name="feedback-on-time"
-                                                                    precision={0.1}
-                                                                    disabled={true}
-                                                                    value={el.feedback.onTime}
-                                                            />
-                                                        </TableCell>
-                                                    </TableRow>
-                                                    <TableRow>
-                                                        <TableCell>Відношення HR до Вас (софт скіл)</TableCell>
-                                                        <TableCell>
-                                                            <Rating name="hr-attitude"
-                                                                    precision={0.1}
-                                                                    disabled={true}
-                                                                    value={el.hr.attitude}
-                                                            />
-                                                        </TableCell>
-
-                                                        <TableCell></TableCell>
-
-                                                        <TableCell>Відношення інтерв'ювера до Вас (софт скіл)</TableCell>
-                                                        <TableCell>
-                                                            <Rating name="tech-attitude"
-                                                                    precision={0.1}
-                                                                    disabled={true}
-                                                                    value={el.tech.attitude}
-                                                            />
-                                                        </TableCell>
-
-                                                        <TableCell></TableCell>
-
-                                                        <TableCell>Розгорнутість фідбеку (причина, рекомендації)</TableCell>
-                                                        <TableCell>
-                                                            <Rating name="feedback-detalization"
-                                                                    precision={0.1}
-                                                                    disabled={true}
-                                                                    value={el.feedback.detailization}
-                                                            />
-                                                        </TableCell>
-                                                    </TableRow>
-                                                    <TableRow>
-                                                        <TableCell>Пунктуальність (все вчасно як домовились чи були провтики)</TableCell>
-                                                        <TableCell>
-                                                            <Rating name="hr-punctuality"
-                                                                    precision={0.1}
-                                                                    disabled={true}
-                                                                    value={el.hr.punctuality}
-                                                            />
-                                                        </TableCell>
-
-                                                        <TableCell></TableCell>
-
-                                                        <TableCell>Продуманість тех питань (якість питань)</TableCell>
-                                                        <TableCell>
-                                                            <Rating name="tech-questions-quality"
-                                                                    precision={0.1}
-                                                                    disabled={true}
-                                                                    value={el.tech.questionsQuality}
-                                                            />
-                                                        </TableCell>
-                                                    </TableRow>
-                                                    <TableRow>
-                                                        <TableCell>Враження після спілкування (осадочок, позитив)</TableCell>
-                                                        <TableCell>
-                                                            <Rating name="hr-impression"
-                                                                    precision={0.1}
-                                                                    disabled={true}
-                                                                    value={el.hr.impression}
-                                                            />
-                                                        </TableCell>
-
-                                                        <TableCell></TableCell>
-
-                                                        <TableCell>Враження після спілкування (осадочок, позитив)</TableCell>
-                                                        <TableCell>
-                                                            <Rating name="tech-impression"
-                                                                    precision={0.1}
-                                                                    disabled={true}
-                                                                    value={el.tech.impression}
-                                                            />
-                                                        </TableCell>
-                                                    </TableRow>
-                                                </TableBody>
-                                            </Table>
-                                            </TableCell>
-                                        }
+                                        el={el}
                                     >
                                         <TableCell>{sliceFrom + i + 1}</TableCell>
                                         <TableCell>{el.companyName}</TableCell>
@@ -305,34 +162,10 @@ let ReviewsList = () => {
                         /*onChangeRowsPerPage={handleChangeRowsPerPage}*/
                     />
 
-
-                      <Accordion>
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel2a-content"
-                            id="panel2a-header"
-                        >
-                          <Typography className={classes.heading}>Accordion 2</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                          <Typography>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                            sit amet blandit leo lobortis eget.
-                          </Typography>
-                        </AccordionDetails>
-                      </Accordion>
-                      <Accordion disabled>
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel3a-content"
-                            id="panel3a-header"
-                        >
-                          <Typography className={classes.heading}>Disabled Accordion</Typography>
-                        </AccordionSummary>
-                      </Accordion>
-
                 </span>
-
+            <br/>
+            <br/>
+            <br/>
             <Footer/>
         </>
     )

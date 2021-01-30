@@ -3,7 +3,7 @@ import Box from "@material-ui/core/Box";
 import React from "react";
 
 
-const RatingItem = ({title, value, setValueMethod, setHoverMethod, reviewsHover, hover, ratingName}) => {
+const RatingItem = ({title, value, setValueMethod, setHoverMethod, reviewsHover, hover, ratingName, size}) => {
 
     return (
 
@@ -15,6 +15,7 @@ const RatingItem = ({title, value, setValueMethod, setHoverMethod, reviewsHover,
                     name={ratingName}
                     precision={1}
                     value={value}
+                    size={size}
                     onChange={(event, newValue) => {
                         setValueMethod(newValue);
                     }}
