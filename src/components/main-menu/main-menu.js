@@ -3,11 +3,18 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import React from "react";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
+import {makeStyles} from '@material-ui/core/styles';
+import SvgIcon from "@material-ui/core/SvgIcon";
 
+
+function HomeIcon(props) {
+    return (
+        <SvgIcon {...props}>
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        </SvgIcon>
+    );
+}
 
 
 const MainMenu = ({title}) => {
@@ -17,7 +24,7 @@ const MainMenu = ({title}) => {
             flexGrow: 1,
         },
         menuButton: {
-            marginRight: theme.spacing(2),
+            marginRight: theme.spacing(2)
         },
         title: {
             flexGrow: 1,
@@ -25,6 +32,18 @@ const MainMenu = ({title}) => {
         },
         login: {
             flexGrow: 1
+        },
+        homeLink: {
+            color: 'white',
+            textDecoration: 'none',
+            textTransform: 'capitalize',
+            marginRight: theme.spacing(4)
+        },
+        navLink: {
+            color: 'white',
+            textDecoration: 'none',
+            textTransform: 'capitalize',
+            marginRight: theme.spacing(2)
         }
     }));
 
@@ -35,29 +54,28 @@ const MainMenu = ({title}) => {
         <>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" className={classes.title}>
+
+                    <Link to="/" className={classes.homeLink}>
+                        <HomeIcon style={{ fontSize: 30 }}/>
+                    </Link>
+
+                    <Link to="/add-review" className={classes.navLink}>
+                        <Button color="inherit">Add review</Button>
+                    </Link>
+                    <Link to="/reviews" className={classes.navLink}>
+                        <Button color="inherit">
+                            Reviews List
+                        </Button>
+                    </Link>
+                   {/* <Typography variant="h6" className={classes.title}>
                         {title}
-                    </Typography>
-
-                    {/*<Typography variant="h6" className={classes.title}>
-                        <Link style={{color:'white'}} to="/">Home</Link>
-                    </Typography>
-                    <Typography variant="h6" className={classes.title}>
-                        <Link style={{color:'white'}} to="/add-review">Add review</Link>
-                    </Typography>
-                    <Typography variant="h6" className={classes.title}>
-                        <Link style={{color:'white'}} to="/reviews">Reviews</Link>
                     </Typography>*/}
-
-                    <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
-            <Link to="/">Home</Link> <br/>
+            <br/>
+            {/*<Link to="/">Home</Link> <br/>
             <Link to="/add-review">Add review</Link><br/>
-            <Link to="/reviews">Reviews</Link><br/><br/>
+            <Link to="/reviews">Reviews</Link><br/><br/>*/}
         </>
     )
 }
