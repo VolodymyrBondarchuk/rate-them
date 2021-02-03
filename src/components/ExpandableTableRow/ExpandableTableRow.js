@@ -213,6 +213,7 @@ const ExpandableTableRow = ({ children, expandComponent, el, ...otherProps }) =>
 
 
                 </TableRow>
+
             </CSSTransition>
 
         </>

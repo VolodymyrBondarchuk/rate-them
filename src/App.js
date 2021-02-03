@@ -3,7 +3,7 @@ import WelcomeScreen from "./pages/welcome-screen/welcome-screen";
 import AddReview from "./pages/add-review/add-review";
 import {Switch, Route} from "react-router";
 import {BrowserRouter} from "react-router-dom";
-import ReviewsList from "./pages/repository-list/ReviewsList";
+import ReviewsList from "./pages/ReviewList/ReviewsList";
 import store from "./redux/store";
 import ReviewAddedSuccessfully from "./pages/review-added-successfully/ReviewAddedSuccessfully";
 

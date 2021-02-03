@@ -30,14 +30,18 @@ let ReviewsList = () => {
 
     const KEYS_TO_FILTERS = ['name', 'description', 'owner.login', 'owner.repos_url']
 
-    const [repositories, setRepositories] = useState([]);
+    const [reviews, setReviews] = useState([]);
     const [filteredEmails, setFilteredEmails] = useState([]);
-    const [activePage, setActivePage] = useState(1);
+
     const [itemsCountPerPage, setitemsCountPerPage] = useState(5);
     const [totalItemsCount, setTotalItemsCount] = useState(0);
     const [pageRangeDisplayed, setPageRangeDisplayed] = useState(3);
     const [sliceFrom, setSliceFrom] = useState(0);
     const [sliceTo, setSliceTo] = useState(5);
+
+    const [activePage, setActivePage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+
     const [isLoaded, setIsLoaded] = useState(false);
     const [isError, setIsError] = useState(false);
 
@@ -46,10 +50,14 @@ let ReviewsList = () => {
 
     useEffect(() => {
 
-        ReviewApi().getLastAddedReviews({page: sliceFrom, amount: sliceTo})
+        fetchReviews(activePage, rowsPerPage);
+
+    }, [rowsPerPage, activePage]);
+
+    let fetchReviews = (page, amount) => {
+        ReviewApi().getLastAddedReviews({page: page, amount: amount})
             .then((res) => {
-                setRepositories(res.data.reviews)
-                setFilteredEmails(res.data.reviews)
+                setReviews(res.data.reviews)
                 setTotalItemsCount(res.data.totalItems);
                 setIsLoaded(true);
                 console.log('Reviews Fetched Success!');
@@ -60,23 +68,22 @@ let ReviewsList = () => {
                 setIsError(true)
                 console.log('Error loading data from git url: '+error);
             });
+    }
 
-        console.log("repositories: " + repositories);
-
-    }, []);
-
-    let handlePageChange = (pageNumber) => {
-        setActivePage(pageNumber);
-        setSliceFrom((pageNumber - 1) * itemsCountPerPage)
-        setSliceTo((pageNumber - 1) * itemsCountPerPage /*sliceFrom*/ + itemsCountPerPage)
-        //debugger
+    let handlePageChange = (event, newPage) => {
+        setActivePage(newPage);
         console.log('Page change');
+    }
+
+    let handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setActivePage(0);
     }
 
     let searchUpdated = (term) => {
         //filter
         term = term === undefined ? '' : term
-        const filtered = repositories.filter(createFilter(term, KEYS_TO_FILTERS));
+        const filtered = reviews.filter(createFilter(term, KEYS_TO_FILTERS));
         setFilteredEmails(filtered);
 
         //set pagination indexes
@@ -106,7 +113,7 @@ let ReviewsList = () => {
         <>
             <MainMenu title="Reviews List"/>
                 <span>
-                    <SearchInput className="search-input" onChange={searchUpdated}/>
+                    {/*<SearchInput className="search-input" onChange={searchUpdated}/>*/}
                     <Table>
                         <TableHead>
                           <TableRow>
@@ -115,7 +122,7 @@ let ReviewsList = () => {
                             <TableCell>Company</TableCell>
                             <TableCell>HR</TableCell>
                             <TableCell>Tech</TableCell>
-                            <TableCell>Interview Rating</TableCell>
+                            <TableCell>Total Rating</TableCell>
                             <TableCell>Vacancy</TableCell>
                             <TableCell>Start date</TableCell>
 
@@ -123,14 +130,14 @@ let ReviewsList = () => {
 
                         </TableHead>
                         <TableBody>
-                            {filteredEmails.slice(sliceFrom, sliceTo).map((el, i) => {
+                            {reviews.map((el, i) => {
                                 return (
 
                                     <ExpandableTableRow
                                         key={i}
                                         el={el}
                                     >
-                                        <TableCell>{sliceFrom + i + 1}</TableCell>
+                                        <TableCell>{activePage * rowsPerPage + i + 1}</TableCell>
                                         <TableCell>{el.companyName}</TableCell>
                                         <TableCell>{el.hr.name}</TableCell>
                                         <TableCell>{el.tech.interviewerName}</TableCell>
@@ -146,20 +153,17 @@ let ReviewsList = () => {
                                         <TableCell>{formatDate(el.startDate)}</TableCell>
                                     </ExpandableTableRow>
 
-
-
-
                                     )})}
                         </TableBody>
                     </Table>
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 25]}
                         component="div"
-                        count={10}
-                        rowsPerPage={5}
-                        page={1}
+                        count={totalItemsCount}
+                        rowsPerPage={rowsPerPage}
+                        page={activePage}
                         onChangePage={handlePageChange}
-                        /*onChangeRowsPerPage={handleChangeRowsPerPage}*/
+                        onChangeRowsPerPage={handleChangeRowsPerPage}
                     />
 
                 </span>
