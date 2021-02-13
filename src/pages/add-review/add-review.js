@@ -8,8 +8,28 @@ import "react-datepicker/dist/react-datepicker.css";
 import ReviewApi from "../../api/ReviewApi";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import Footer from "../../components/footer/footer";
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import {makeStyles} from '@material-ui/core/styles';
+import CityApi from "../../api/CityApi";
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import CompanyApi from "../../api/CompanyApi";
+
+
+const useStyles = makeStyles((theme) => ({
+    formControl: {
+        margin: theme.spacing(1),
+        marginLeft: theme.spacing(0),
+        minWidth: 200
+    },
+    selectEmpty: {
+        marginTop: theme.spacing(2),
+    },
+}));
 
 const AddReview = ({reviewsHover}) => {
 
@@ -68,18 +88,82 @@ const AddReview = ({reviewsHover}) => {
     const [isSuccess, setIsSuccess] = React.useState(false);
     const [isError, setIsError] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState("Something went wrong");
+
+    const [cities, setCities] = React.useState([]);
+    const [companies, setCompanies] = React.useState([]);
+
+    const [activeCityId, setActiveCityId] = React.useState(0);
+    const [activeCompanyId, setActiveCompanyId] = React.useState(0);
+
+    const [companyQuickSearch, setCompanyQuickSearch] = React.useState("");
+
+    const classes = useStyles();
     let history = useHistory();
 
     useEffect(() => {
         //setIceBrakeValue(hr.ice_brake)
-    })
+        CityApi().getAllCities().then(
+            (res) => {
+                setCities(res.data);
+                console.log('Cities Fetched Success!');
+                //debugger
+            }
+        ).catch(error => {
+            console.log('Error loading cities url: '+error)
+        });
+
+        fetchCompanies(companyQuickSearch);
+
+    }, [])
+
+    let fetchCompanies = (chars)=>{
+        CompanyApi().findCompanyByNameLike(chars).then(
+            (res) => {
+                setCompanies(res.data);
+                console.log('Companies Fetched Success!');
+                //debugger
+            }
+        ).catch(error => {
+            console.log('Error loading companies url: '+error)
+        });
+    }
+
+    let handleCompanyNameChange = (event) => {
+        console.log("Company name changed: "+event.target.value)
+        fetchCompanies( event.target.value)
+    }
+
+    let handleCompanyNameSelected = (event) => {
+        let companyNameSelected = event.target.value;
+        let companyIdSelected = 0;
+
+        setCompanyName(companyNameSelected);
+        setActiveCompanyId(companyIdSelected);
+
+
+        for(const prop in companies) {
+            if(companies[prop].name === companyNameSelected){
+                companyIdSelected = companies[prop].id;
+                setActiveCompanyId(companyIdSelected);
+                break
+            }
+        }
+
+        console.log("Company Name selected: "+companyNameSelected)
+        console.log("Company ID Selected: "+companyIdSelected)
+
+    }
 
     let handleSaveReview = (e)=>{
         e.preventDefault();
         let  review = {
             vacancyName: vacancyName,
+            //TODO: remove companyName and use companyId instead
             companyName: companyName,
+            companyId: activeCompanyId,
+            //TODO: remove cityName and use cityId instead
             cityName: cityName,
+            cityId: activeCityId,
             startDate: startDate,
             endDate: endDate,
             hr: {
@@ -140,6 +224,24 @@ const AddReview = ({reviewsHover}) => {
         setIsError(false);
         setErrorMessage("Something went wring");
     }
+
+    const handleCityChange = (event) => {
+        console.log("Active city ID:"+event.target.value)
+        let cityId = parseInt(event.target.value, 10);
+        let city = "";
+        setActiveCityId(cityId);
+
+        //TODO: remove this once backend will be abl to resolve city by id
+        for(const prop in cities) {
+            if(cities[prop].id === cityId) {
+                city = cities[prop].name;
+                setCityName(city);
+                break;
+            }
+        }
+
+        console.log("city name: "+city)
+    };
     return (
         <>
             <MainMenu title="Add Review"/>
@@ -157,19 +259,57 @@ const AddReview = ({reviewsHover}) => {
                     />
 
                     <br/>
-                    {/*//TOOD: change it to dropdown list*/}
-                    <InputItem title='Компанія'
-                               name="company-name"
-                               placeholder='NiX'
-                               setValueMethod={setCompanyName}
-                    />
+
+                    <div className='review-item-body'>
+                        <span className='review-lable'>Компанія</span>
+                        <div style={{width: 200, display: "inline-block"}}>
+                            <Autocomplete
+                                id="auto-complete"
+                                options={companies.map((company) => company.name)}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        label="Company Name"
+                                        margin="normal"
+                                        size="small"
+                                        onSelect={handleCompanyNameSelected}
+                                        onChange={handleCompanyNameChange}
+                                    />
+                                )}
+                            />
+                        </div>
+
+                    </div>
                     <br/>
-                    {/*//TOOD: change it to dropdown list*/}
-                    <InputItem title='Місто'
-                               name="city-name"
-                               placeholder='Львів'
-                               setValueMethod={setCityName}
-                    />
+
+                    <div className='review-item-body'>
+                        <span className='review-lable'>Місто</span>
+
+                        <FormControl className={classes.formControl}>
+                            <InputLabel htmlFor="age-native-simple">City</InputLabel>
+                            <Select
+                                native
+                                value={activeCityId}
+                                onChange={handleCityChange}
+                                inputProps={{
+                                    name: 'age',
+                                    id: 'age-native-simple',
+                                }}
+                            >
+                                <option aria-label="None" value={0} />
+                                {cities.map((el, i) => {
+                                    return (
+                                        <option key={el.id}
+                                                value={el.id}
+                                                name={el.name}
+                                                label={el.name}
+                                        >{el.name}
+                                        </option>
+                                        )})}
+
+                            </Select>
+                        </FormControl>
+                    </div>
                     <br/>
                     <br/>
                     <div className='review-item-body'>

@@ -12,6 +12,7 @@ const InputItem = ({title, name, placeholder, setValueMethod}) => {
                        onChange={(event) => {
                            setValueMethod(event.target.value);
                        }}/>
+
             </div>
         </>
     )
