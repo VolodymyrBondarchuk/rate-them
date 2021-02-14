@@ -3,7 +3,7 @@ import axios from "axios";
 
 const CompanyApi = () => {
     return {
-        findCompanyByNameLike: (payload) => axios.post(`${config.backendDev}`+"/api/company/name/contains", payload)
+        findCompanyByNameLike: (payload) => axios.post(`${config.backendDev}`+"/api/company/name/contains?chars="+payload)
     }
 };
 

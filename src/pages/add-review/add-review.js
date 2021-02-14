@@ -18,6 +18,7 @@ import CityApi from "../../api/CityApi";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CompanyApi from "../../api/CompanyApi";
+import MenuItem from "@material-ui/core/MenuItem";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
     selectEmpty: {
         marginTop: theme.spacing(2),
-    },
+    }
 }));
 
 const AddReview = ({reviewsHover}) => {
@@ -133,6 +134,11 @@ const AddReview = ({reviewsHover}) => {
         fetchCompanies( event.target.value)
     }
 
+    let handleCompanyNameReset = (event) => {
+        console.log("Company name Reset: "+event.target.value)
+
+    }
+
     let handleCompanyNameSelected = (event) => {
         let companyNameSelected = event.target.value;
         let companyIdSelected = 0;
@@ -149,6 +155,9 @@ const AddReview = ({reviewsHover}) => {
             }
         }
 
+        if(companyNameSelected === "") {
+            fetchCompanies("");
+        }
         console.log("Company Name selected: "+companyNameSelected)
         console.log("Company ID Selected: "+companyIdSelected)
 
@@ -266,14 +275,17 @@ const AddReview = ({reviewsHover}) => {
                             <Autocomplete
                                 id="auto-complete"
                                 options={companies.map((company) => company.name)}
+                                freeSolo
+
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
-                                        label="Company Name"
+                                        label="Start typing..."
                                         margin="normal"
                                         size="small"
                                         onSelect={handleCompanyNameSelected}
                                         onChange={handleCompanyNameChange}
+                                        onReset={handleCompanyNameReset}
                                     />
                                 )}
                             />
@@ -286,29 +298,23 @@ const AddReview = ({reviewsHover}) => {
                         <span className='review-lable'>Місто</span>
 
                         <FormControl className={classes.formControl}>
-                            <InputLabel htmlFor="age-native-simple">City</InputLabel>
+                            <InputLabel id="city-input-id">City</InputLabel>
+
                             <Select
-                                native
+                                labelId="city-input-id"
+                                id="city-select-id"
                                 value={activeCityId}
                                 onChange={handleCityChange}
-                                inputProps={{
-                                    name: 'age',
-                                    id: 'age-native-simple',
-                                }}
                             >
-                                <option aria-label="None" value={0} />
+                                <MenuItem value={0}><i style={{color:"rgba(0, 0, 0, 0.54)"}}>Select city</i></MenuItem>
                                 {cities.map((el, i) => {
                                     return (
-                                        <option key={el.id}
-                                                value={el.id}
-                                                name={el.name}
-                                                label={el.name}
-                                        >{el.name}
-                                        </option>
+                                        <MenuItem key={el.id} value={el.id}>{el.name}</MenuItem>
                                         )})}
 
                             </Select>
                         </FormControl>
+
                     </div>
                     <br/>
                     <br/>
