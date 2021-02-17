@@ -20,9 +20,10 @@ const WelcomeScreen = () => {
             textDecoration: 'none',
             textTransform: 'capitalize',
             marginRight: theme.spacing(2),
+            borderRadius: '12px',
             boxShadow: '0 0 0px rgba(255,255,255,0.5)',
             '&:hover': {
-                boxShadow: '0 0 5px rgba(255,255,255,0.5)',
+                boxShadow: '0 0 10px rgba(255,255,255,0.5)',
             },
         }
     }));
@@ -61,7 +62,6 @@ const WelcomeScreen = () => {
                 <img src={onlineSurveyImg} className='first-screen-img' />
                 </div>
             </div>
-            <br/>
             <br/>
             <br/>
             <Footer/>
