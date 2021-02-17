@@ -1,14 +1,10 @@
-import logo from '../../logo.svg';
 import MainMenu from "../../components/main-menu/main-menu";
-import {FacebookShareButton} from "react-share";
 import Footer from "../../components/footer/footer";
 import onlineSurveyImg from "../../images/online-survey.png"
 import {makeStyles} from "@material-ui/core/styles";
 import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import Toolbar from "@material-ui/core/Toolbar";
 import React from "react";
-
 
 
 const WelcomeScreen = () => {
@@ -20,7 +16,7 @@ const WelcomeScreen = () => {
             textDecoration: 'none',
             textTransform: 'capitalize',
             marginRight: theme.spacing(2),
-            borderRadius: '12px',
+            borderRadius: '4px',
             boxShadow: '0 0 0px rgba(255,255,255,0.5)',
             '&:hover': {
                 boxShadow: '0 0 10px rgba(255,255,255,0.5)',

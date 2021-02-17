@@ -1,4 +1,3 @@
-import logo from '../../logo.svg';
 import MainMenu from "../../components/main-menu/main-menu";
 import Alert from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle";
