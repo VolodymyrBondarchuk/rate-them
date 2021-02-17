@@ -12,9 +12,9 @@ const ReviewAddedSuccessfully = () => {
         <>
             <MainMenu title='Success'/>
             <Alert severity="success">
-                <AlertTitle>Success</AlertTitle>
-                Thank you! <strong>Your review has been added successfully!</strong> <br/>
-                Click on the link to refer the to Reviews page <Link to="/reviews">Link</Link>
+                <AlertTitle>Успішно</AlertTitle>
+                Дякуємо! <strong>Ваш відгук успішно додано!</strong> <br/>
+                Натисніть, будь ласка, на посилання, щоб перейти на сторінку з усіма відгуками <Link to="/reviews">Посилання</Link>
             </Alert>
 
         </>

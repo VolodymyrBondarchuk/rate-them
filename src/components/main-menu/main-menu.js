@@ -60,11 +60,11 @@ const MainMenu = ({title}) => {
                     </Link>
 
                     <Link to="/add-review" className={classes.navLink}>
-                        <Button color="inherit">Add review</Button>
+                        <Button color="inherit">Додати Відгук</Button>
                     </Link>
                     <Link to="/reviews" className={classes.navLink}>
                         <Button color="inherit">
-                            Reviews List
+                            Всі Відгуки
                         </Button>
                     </Link>
                    {/* <Typography variant="h6" className={classes.title}>

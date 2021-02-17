@@ -254,7 +254,7 @@ const AddReview = ({reviewsHover}) => {
     return (
         <>
             <MainMenu title="Add Review"/>
-            <h1 className='review-h1'>Add Review</h1>
+            <h1 className='review-h1'>Додати Відгук</h1>
 
             <br/>
 
@@ -280,7 +280,7 @@ const AddReview = ({reviewsHover}) => {
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
-                                        label="Start typing..."
+                                        label="Почніть вводити назву ..."
                                         margin="normal"
                                         size="small"
                                         onSelect={handleCompanyNameSelected}
@@ -298,7 +298,7 @@ const AddReview = ({reviewsHover}) => {
                         <span className='review-lable'>Місто</span>
 
                         <FormControl className={classes.formControl}>
-                            <InputLabel id="city-input-id">City</InputLabel>
+                            <InputLabel id="city-input-id">Місто</InputLabel>
 
                             <Select
                                 labelId="city-input-id"
@@ -306,7 +306,7 @@ const AddReview = ({reviewsHover}) => {
                                 value={activeCityId}
                                 onChange={handleCityChange}
                             >
-                                <MenuItem value={0}><i style={{color:"rgba(0, 0, 0, 0.54)"}}>Select city</i></MenuItem>
+                                <MenuItem value={0}><span style={{color:"rgba(0, 0, 0, 0.54)"}}>Виберіть місто</span></MenuItem>
                                 {cities.map((el, i) => {
                                     return (
                                         <MenuItem key={el.id} value={el.id}>{el.name}</MenuItem>
@@ -466,7 +466,7 @@ const AddReview = ({reviewsHover}) => {
                     <br/>
                     <br/>
 
-                    <Button variant="contained" color="primary" onClick={handleSaveReview}>Save</Button>
+                    <Button variant="contained" color="primary" onClick={handleSaveReview}>Надіслати</Button>
                     <Snackbar open={isError} autoHideDuration={6000} onClose={handleClose}>
                         <Alert onClose={handleClose} severity="warning">
                             {errorMessage}
@@ -474,7 +474,7 @@ const AddReview = ({reviewsHover}) => {
                     </Snackbar>
                     <Snackbar open={isSuccess} autoHideDuration={6000} onClose={handleClose}>
                         <Alert onClose={handleClose} severity="success">
-                            Saved Successfully
+                            Збережено успішно
                         </Alert>
                     </Snackbar>
                     <br/>

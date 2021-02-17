@@ -9,7 +9,8 @@
   width: 100%;
   height: 500px;
   color: white;
-  background: #1d5d90;
+  /*background: #1d5d90;*/
+  background: #3f51b5;
   display: flex;
   justify-content: space-around;
 }
@@ -27,6 +28,12 @@
   align-self: center;
 }
 
+.div-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
 .title {
   font-family: Roboto;
   font-size: 35px;
@@ -37,12 +44,14 @@
   font-family: Roboto;
   font-size: 20px;
   max-width: 600px;
-  }
+  line-height: 32px;
+}
 
 .sub-title-2 {
   font-family: Roboto;
   max-width: 600px;
   font-size: 15px;
+  line-height: 25px;
 }
 
 .first-screen-img {

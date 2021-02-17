@@ -57,13 +57,13 @@ const ExpandableTableRow = ({ children, expandComponent, el, ...otherProps }) =>
                             <TableHead>
                                 <TableRow>
                                     <TableCell style={{"width":"170px", "borderBottom":"0px"}}></TableCell>
-                                    <TableCell style={{"border-bottom":"0px"}}>HR</TableCell>
+                                    <TableCell style={{"border-bottom":"0px"}}>Рекрутер</TableCell>
                                     <TableCell style={{"border-bottom":"0px"}} ></TableCell>
                                     <TableCell style={{"width":"170px", "borderBottom":"0px"}}></TableCell>
-                                    <TableCell style={{"border-bottom":"0px"}}>Tech</TableCell>
+                                    <TableCell style={{"border-bottom":"0px"}}>Тех. Інтерв'ювер</TableCell>
                                     <TableCell style={{"border-bottom":"0px"}}></TableCell>
                                     <TableCell style={{"width":"170px", "borderBottom":"0px"}}></TableCell>
-                                    <TableCell style={{"border-bottom":"0px"}}>Feedback</TableCell>
+                                    <TableCell style={{"border-bottom":"0px"}}>Фідбек</TableCell>
                                 </TableRow>
 
                             </TableHead>

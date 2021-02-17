@@ -2,10 +2,32 @@ import logo from '../../logo.svg';
 import MainMenu from "../../components/main-menu/main-menu";
 import {FacebookShareButton} from "react-share";
 import Footer from "../../components/footer/footer";
-import onlineSurveyImg from "../../images/online-survey.jpg"
+import onlineSurveyImg from "../../images/online-survey.png"
+import {makeStyles} from "@material-ui/core/styles";
+import {Link} from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import Toolbar from "@material-ui/core/Toolbar";
+import React from "react";
+
+
 
 const WelcomeScreen = () => {
 
+    const useStyles = makeStyles((theme) => ({
+        navLink: {
+            color: 'white',
+            border: '1px solid white',
+            textDecoration: 'none',
+            textTransform: 'capitalize',
+            marginRight: theme.spacing(2),
+            boxShadow: '0 0 0px rgba(255,255,255,0.5)',
+            '&:hover': {
+                boxShadow: '0 0 5px rgba(255,255,255,0.5)',
+            },
+        }
+    }));
+
+    const classes = useStyles();
     return (
 
         <>
@@ -13,55 +35,35 @@ const WelcomeScreen = () => {
 
             <div className='first-screen'>
                 <div className="div-left">
-                <p className='title'>
-                    Оцінка якості ІТ інтерв'ю
-                </p>
-                <p className='sub-title'>
-                    Залишаємо фідбек про ІТ компанію після проходження тех інтерв'ю - уникаємо хамських копаній - спілкуємось з Top-nice компаніями
-                </p>
-                <p className='sub-title-2'>
-                    HR-и та власники ІТ компаній мають хороше джерело зворотнього зв'язку для покращення процесу хайрінгу
-                </p>
+                    <p className='title'>
+                        Оцінка якості ІТ інтерв'ю
+                    </p>
+                    <p className='sub-title'>
+                        Технічні спеціалісти можуть лишити відгук та оцінити якість проведення тех інтерв'ю в ІТ компанії
+                    </p>
+                    <p className='sub-title-2'>
+                        HR-и та власники ІТ компаній мають хороше джерело зворотнього зв'язку для покращення процесу хайрінгу
+                    </p>
+                    <p>
+                        <div className='div-buttons'>
+                            <Link to="/add-review" className={classes.navLink}>
+                                <Button color="inherit" hover>Додати Відгук</Button>
+                            </Link>
+                            <Link to="/reviews" className={classes.navLink}>
+                                <Button color="inherit">
+                                    Переглянути Відгуки
+                                </Button>
+                            </Link>
+                        </div>
+                    </p>
                 </div>
                 <div className="div-right">
                 <img src={onlineSurveyImg} className='first-screen-img' />
                 </div>
             </div>
-            <div className='app-description'>
-                <p>Привіт.<br/><br/>
-                    Цей проект дозволяє кандидату, який шукає роботу в ІТ та проходить співбесіди оцінити технічного інтервювера на предмет адекватного і неупередженого ставлення
-                    адекватно вміють спілкуватися, зажавати питання і розкривати кандидата<br/><br/>
-                    <strong>Основна проблема </strong> при проходженні співбесід це:<br/><br/>
-                    а) тех інтервювери <strike>це Царь і Бог і їм можна всьо</strike> не вміють спілкуватися з людьми, ведуть себе панібратськи,
-                    безцеремонно, зверхньо, грубо і т.п.<br/><br/>
-                    б) за фідбеком після співбеіди треба бігати до рекрутера по декілька разів, а коли отримуєм його то виявляється, що це просто банальна відписка
-                    З мого досвіду такі ситуації на українському ІТ ринку трапляються у 90%
-                    випадків. І це сумно :(<br/><br/><br/>
-                </p>
-                <p>
-                    Дуже великий контраст після спілкування напряму з іноземними замовниками при роботі через Upwork.
-                    Після співбесід з іноземними замовниками Ви покидаєте співбесіду з хорошим припіднятим настроєм
-                    навіть якщо Ви її провалили.
-                    Після співбесід з нашими - Ви виходите з подавленим настроєм.
-                </p>
-
-                <p>
-                    <br/>
-                    <strong>Рішення:</strong> <br/><br/>
-                    а) створюємо систему в якій можемо лишити фідбек про компанію по кожному етапу інтерв'ю: HR, Tech, Feedback
-                    <br/><br/>
-                    б) компанії дивляться на це і починають вчити своїх технарів, як проводити інтерв'ю
-                    Таким чином ми зможемо змінити цю дибільну ситуацію на , показати роботодавцям, як кандидати оцінюють їхній
-                    процес інтерв'ю і яке враження він для них складає.
-                    <br/><br/>
-                </p>
-                <p>
-                    Діліться з друзями посиланням на цей ресурс, залишайте відгуки після пройдених співбесід та давайте
-                    міняти світ на краще!:)
-                </p>
-                <FacebookShareButton url='https://facebook.com'>Facebook</FacebookShareButton>
-                <br/><br/><br/><br/>
-            </div>
+            <br/>
+            <br/>
+            <br/>
             <Footer/>
         </>
     )
