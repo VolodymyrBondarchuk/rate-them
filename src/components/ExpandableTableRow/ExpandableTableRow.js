@@ -13,6 +13,7 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import Star from '@material-ui/icons/StarBorder';
 import StarIcon from '@material-ui/icons/StarBorder';
 import "./ExpandableTableRow.css";
+import TextField from "@material-ui/core/TextField";
 
 const ExpandableTableRow = ({ children, expandComponent, el, ...otherProps }) => {
     const [isExpanded, setIsExpanded] = React.useState(false);
@@ -57,13 +58,13 @@ const ExpandableTableRow = ({ children, expandComponent, el, ...otherProps }) =>
                             <TableHead>
                                 <TableRow>
                                     <TableCell style={{"width":"170px", "borderBottom":"0px"}}></TableCell>
-                                    <TableCell style={{"border-bottom":"0px"}}>Рекрутер</TableCell>
+                                    <TableCell style={{"width":"230px", "border-bottom":"0px"}}>Рекрутер</TableCell>
                                     <TableCell style={{"border-bottom":"0px"}} ></TableCell>
                                     <TableCell style={{"width":"170px", "borderBottom":"0px"}}></TableCell>
-                                    <TableCell style={{"border-bottom":"0px"}}>Тех. Інтерв'ювер</TableCell>
+                                    <TableCell style={{"width":"230px", "border-bottom":"0px"}}>Тех. Інтерв'ювер</TableCell>
                                     <TableCell style={{"border-bottom":"0px"}}></TableCell>
                                     <TableCell style={{"width":"170px", "borderBottom":"0px"}}></TableCell>
-                                    <TableCell style={{"border-bottom":"0px"}}>Фідбек</TableCell>
+                                    <TableCell style={{"width":"230px", "border-bottom":"0px"}}>Фідбек</TableCell>
                                 </TableRow>
 
                             </TableHead>
@@ -180,6 +181,7 @@ const ExpandableTableRow = ({ children, expandComponent, el, ...otherProps }) =>
                                                 value={el.tech.questionsQuality}
                                         />
                                     </TableCell>
+
                                 </TableRow>
                                 <TableRow>
                                     <TableCell>Враження після спілкування (осадочок, позитив)</TableCell>
@@ -206,6 +208,38 @@ const ExpandableTableRow = ({ children, expandComponent, el, ...otherProps }) =>
                                         />
                                     </TableCell>
                                 </TableRow>
+                                <br/>
+                                <br/>
+                                <TableRow>
+
+                                    <TableCell style={{
+                                        "border-bottom":"0px solid",
+                                        "font-family": "Courier New, monospace"}}>
+                                        Коментар про Рекрутера
+                                    </TableCell>
+                                    <TableCell style={{"border-bottom":"0px solid"}}><i>{el.hr.comment}</i></TableCell>
+
+                                    <TableCell style={{"border-bottom":"0px solid"}}></TableCell>
+                                    <TableCell style={{
+                                        "border-bottom":"0px solid",
+                                        "font-family": "Courier New, monospace"}}>
+                                        Коментар про Технічного Інтерв'ювера
+                                    </TableCell>
+                                    <TableCell style={{"border-bottom":"0px solid"}}><i>{el.tech.comment}</i></TableCell>
+
+                                    <TableCell style={{"border-bottom":"0px solid"}}></TableCell>
+                                    <TableCell style={{
+                                        "border-bottom":"0px solid",
+                                        "font-family": "Courier New, monospace"}}>
+                                        Коментар про Фідбек
+                                    </TableCell>
+                                    <TableCell style={{"border-bottom":"0px solid"}}><i>{el.feedback.comment}</i></TableCell>
+                                </TableRow>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+
                             </TableBody>
                         </Table>
 

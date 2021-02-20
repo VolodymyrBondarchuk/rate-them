@@ -19,6 +19,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CompanyApi from "../../api/CompanyApi";
 import MenuItem from "@material-ui/core/MenuItem";
+import {Input} from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -330,9 +331,10 @@ const AddReview = ({reviewsHover}) => {
                     <br/>
                     <br/>
                     <br/>
-                    <h3>Hr інтерв'ю</h3>
 
-                    <InputItem title='ПІБ HR-a'
+                    <h3>Інтерв'ю з Рекрутером</h3>
+
+                    <InputItem title='ПІБ Рекрутерa'
                                name="hr-name"
                                placeholder='Олена Давидова'
                                setValueMethod={setHrPersonName}
@@ -375,15 +377,25 @@ const AddReview = ({reviewsHover}) => {
                                 hover={hrImpressionHover}
                     />
                     <br/>
-                    <InputItem title='Коментар'
-                               name="hr-comment"
-                               placeholder=''
-                               setValueMethod={setHrComment}
-                    />
+
+                    <div className='review-item-body'>
+                        <TextField
+                            name="hr-comment"
+                            placeholder='Коментар про рекрутера ...'
+                            multiline
+                            fullWidth
+                            rows={4}
+                            variant="outlined"
+                               onChange={(event) => {
+                                   setHrComment(event.target.value);
+                               }}/>
+
+                    </div>
+
                     <br/>
                     <br/>
                     <br/>
-                    <h3>Тех інтерв'ю</h3>
+                    <h3>Технічне інтерв'ю</h3>
 
                     <InputItem title='ПІБ Tech Інтервювера'
                                name="tech-interviewer-name"
@@ -428,11 +440,19 @@ const AddReview = ({reviewsHover}) => {
                     />
                     <br/>
 
-                    <InputItem title='Коментар'
-                               name="tech-comment"
-                               placeholder=''
-                               setValueMethod={setTechComment}
-                    />
+                    <div className='review-item-body'>
+                        <TextField
+                            name="tech-comment"
+                            placeholder="Коментар про технічного інтерв'ювера..."
+                            multiline
+                            fullWidth
+                            rows={4}
+                            variant="outlined"
+                            onChange={(event) => {
+                                setTechComment(event.target.value);
+                            }}/>
+
+                    </div>
 
                     <br/>
                     <br/>
@@ -456,11 +476,21 @@ const AddReview = ({reviewsHover}) => {
                                 hover={feedbackDetalizationHover}
                     />
                     <br/>
-                    <InputItem title='Коментар'
-                               name="feedback-comment"
-                               placeholder=''
-                               setValueMethod={setFeedbackComment}
-                    />
+
+                    <div className='review-item-body'>
+
+                        <TextField
+                            name="feedback-comment"
+                            placeholder='Коментар з приводу фідбеку ...'
+                            multiline
+                            fullWidth
+                            rows={4}
+                            variant="outlined"
+                            onChange={(event) => {
+                                setFeedbackComment(event.target.value);
+                            }}/>
+
+                    </div>
 
                     <br/>
                     <br/>
