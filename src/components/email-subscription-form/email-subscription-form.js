@@ -26,7 +26,10 @@ const EmailSubscriptionForm = () => {
 
         if (emailValidationRegex.test(email)) {
             //if email is valid then store it at backend
-            EmailSubscriptionApi().addEmailSubscription(email)
+            let emailSubscription = {
+                email: email
+            }
+            EmailSubscriptionApi().addEmailSubscription(emailSubscription)
                 .then((res) => {
                     setIsSuccess(true);
                     setIsError(false);
