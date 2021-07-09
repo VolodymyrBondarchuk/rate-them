@@ -16,6 +16,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import ExpandableTableRow from "../../components/ExpandableTableRow/ExpandableTableRow";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
+import ReactGA from 'react-ga';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 let ReviewsList = () => {
 
+    ReactGA.pageview(window.location.pathname + window.location.search);
     const KEYS_TO_FILTERS = ['name', 'description', 'owner.login', 'owner.repos_url']
 
     const [reviews, setReviews] = useState([]);

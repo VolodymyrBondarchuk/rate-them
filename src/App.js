@@ -8,9 +8,12 @@ import store from "./redux/store";
 import ReviewAddedSuccessfully from "./pages/review-added-successfully/ReviewAddedSuccessfully";
 import DesktopDeviceOnly from "./components/HOC/desktop-device-only/desktop-device-only";
 import React from "react";
+import ReactGA from 'react-ga';
 
 
 function App() {
+
+    ReactGA.initialize('G-9WS8DDL6NH');
 
     const [showMobile, setShowMobile] = React.useState(false);
 

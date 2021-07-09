@@ -5,9 +5,12 @@ import {makeStyles} from "@material-ui/core/styles";
 import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import React from "react";
-
+import ReactGA from 'react-ga';
+import EmailSubscriptionForm from "../../components/email-subscription-form/email-subscription-form";
 
 const WelcomeScreen = () => {
+
+    ReactGA.pageview(window.location.pathname + window.location.search);
 
     const useStyles = makeStyles((theme) => ({
         navLink: {
@@ -41,7 +44,7 @@ const WelcomeScreen = () => {
                     <p className='sub-title-2'>
                         HR-и та власники ІТ компаній мають хороше джерело зворотнього зв'язку для покращення процесу найму
                     </p>
-                    <p>
+                    {/*<p>
                         <div className='div-buttons'>
                             <Link to="/add-review" className={classes.navLink}>
                                 <Button color="inherit" hover>Додати Відгук</Button>
@@ -52,14 +55,13 @@ const WelcomeScreen = () => {
                                 </Button>
                             </Link>
                         </div>
-                    </p>
+                    </p>*/}
                 </div>
                 <div className="div-right">
                 <img src={onlineSurveyImg} className='first-screen-img' />
                 </div>
             </div>
-            <br/>
-            <br/>
+            <EmailSubscriptionForm/>
             <Footer/>
         </>
     )

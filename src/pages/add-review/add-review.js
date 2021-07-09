@@ -20,6 +20,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import CompanyApi from "../../api/CompanyApi";
 import MenuItem from "@material-ui/core/MenuItem";
 import {Input} from "@material-ui/core";
+import ReactGA from 'react-ga';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AddReview = ({reviewsHover}) => {
+
+    ReactGA.pageview(window.location.pathname + window.location.search);
 
     const [vacancyName, setVacancyName] = React.useState("");
     const [companyName, setCompanyName] = React.useState("");
@@ -232,7 +235,7 @@ const AddReview = ({reviewsHover}) => {
 
     let handleClose = () => {
         setIsError(false);
-        setErrorMessage("Something went wring");
+        setErrorMessage("Something went wrong");
     }
 
     const handleCityChange = (event) => {
